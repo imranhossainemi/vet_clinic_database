@@ -175,7 +175,7 @@ Example:
 ```sh
 
 ```
- --> -->
+ --> 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -183,7 +183,7 @@ Example:
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 **Author1**
+👤 **Author**
 
 - GitHub: [@imranhossainemi](https://github.com/imranhossainemi)
 <!-- - Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
