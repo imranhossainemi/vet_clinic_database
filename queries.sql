@@ -111,3 +111,27 @@ SELECT MAX(escape_attempts) FROM animals WHERE neutered = false OR true;
 
 --What is the minimum and maximum weight of each type of animal?
 SELECT MIN(weight_kg), MAX(weight_kg) FROM animals;
+
+--What animals belong to Melody Pond?
+SELECT name FROM animals INNER JOIN owners ON animals.owners_id = owners.owners_id WHERE owners.full_name = 'Melody';
+
+--List of all animals that are pokemon (their type is Pokemon).
+SELECT * FROM animals INNER JOIN species ON animals.species_id = species.spcies_id WHERE species.species_name = 'Pokemon';
+
+--List all owners and their animals, remember to include those that don't own any animal.
+SELECT * FROM animals RIGHT JOIN owners ON animals.owners_id = owners.owners_id;
+
+--How many animals are there per species?
+SELECT species.species_name as species_name, COUNT(*) as num_animals
+FROM animals
+JOIN species ON animals.species_id = species.spcies_id
+GROUP BY species.species_name;
+
+--List all Digimon owned by Jennifer Orwell.
+SELECT * FROM animals INNER JOIN owners ON animals.owners_id = owners.owners_id INNER JOIN species ON animals.species_id = species.spcies_id  WHERE owners.full_name = 'Jennifer Orwell' AND species.species_name = 'Digimon';
+
+--List all animals owned by Dean Winchester that haven't tried to escape.
+SELECT * FROM animals INNER JOIN owners ON animals.owners_id = owners.owners_id WHERE owners.full_name = 'Dean Winchester' AND escape_attempts = 0;
+
+--Who owns the most animals?
+SELECT owners.full_name,COUNT(animals.id) AS num_animals FROM owners INNER JOIN animals ON owners.owners_id = animals.owners_id GROUP BY owners.owners_id ORDER BY num_animals DESC LIMIT 1;
