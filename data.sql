@@ -95,3 +95,17 @@ INSERT INTO animals (
   weight_kg
   ) 
   VALUES ('Ditto', date '2022-05-14' , 4, true, 22);
+
+-- Data entry for owners table
+
+INSERT INTO owners (full_name, owners_age) VALUES ('Sam Smith', 34);
+INSERT INTO owners (full_name, owners_age) VALUES ('Jennifer Orwell', 19);
+INSERT INTO owners (full_name, owners_age) VALUES ('Bob', 45);
+INSERT INTO owners (full_name, owners_age) VALUES ('Melody', 77);
+INSERT INTO owners (full_name, owners_age) VALUES ('Dean Winchester', 14);
+INSERT INTO owners (full_name, owners_age) VALUES ('Jodie Whittaker', 38);
+
+-- Data entry for species table
+
+INSERT INTO species(species_name) VALUES ('Pokemon');
+INSERT INTO species(species_name) VALUES ('Digimon');
