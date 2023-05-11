@@ -122,9 +122,10 @@ SELECT * FROM animals INNER JOIN species ON animals.species_id = species.spcies_
 SELECT * FROM animals RIGHT JOIN owners ON animals.owners_id = owners.owners_id;
 
 --How many animals are there per species?
-SELECT COUNT(name) FROM animals INNER JOIN species ON animals.species_id = species.spcies_id WHERE species.species_name = 'Pokemon';
-
-SELECT COUNT(name) FROM animals INNER JOIN species ON animals.species_id = species.spcies_id WHERE species.species_name = 'Digimon';
+SELECT species.species_name as species_name, COUNT(*) as num_animals
+FROM animals
+JOIN species ON animals.species_id = species.spcies_id
+GROUP BY species.species_name;
 
 --List all Digimon owned by Jennifer Orwell.
 SELECT * FROM animals INNER JOIN owners ON animals.owners_id = owners.owners_id INNER JOIN species ON animals.species_id = species.spcies_id  WHERE owners.full_name = 'Jennifer Orwell' AND species.species_name = 'Digimon';
