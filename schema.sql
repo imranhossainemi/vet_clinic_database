@@ -36,24 +36,24 @@ CREATE TABLE vets (
   vet_id BIGSERIAL NOT NULL PRIMARY KEY,
   vet_name VARCHAR(100) NOT NULL,
   vet_age INT NOT NULL,
-  date_of_graduation: date NOT NULL
+  date_of_graduation date NOT NULL
 );
 
 CREATE TABLE specializations (
   spe_id BIGSERIAL NOT NULL PRIMARY KEY,
-  vet_id BIGSERIAL NOT NULL,
-  species_id BIGSERIAL NOT NULL,
-  ADD CONSTRAINT fk_vet_id FOREIGN KEY (vet_id) REFERENCES vets(vet_id) ON DELETE CASCADE;
-  ADD CONSTRAINT fk_species_id FOREIGN KEY (species_id) REFERENCES species(spcies_id) ON DELETE CASCADE;
+  vet_id BIGSERIAL,
+  species_id BIGSERIAL,
+  CONSTRAINT fk_vet_id FOREIGN KEY (vet_id) REFERENCES vets(vet_id) ON DELETE CASCADE,
+  CONSTRAINT fk_species_id FOREIGN KEY (species_id) REFERENCES species(spcies_id) ON DELETE CASCADE
 );
 
 CREATE TABLE visits (
   visit_id BIGSERIAL NOT NULL PRIMARY KEY,
-  vet_id BIGSERIAL NOT NULL,
-  animals_id BIGSERIAL NOT NULL,
+  vet_id BIGSERIAL,
+  animals_id BIGSERIAL,
   date_of_visit date NOT NULL,
-  ADD CONSTRAINT fk_vet_id FOREIGN KEY (vet_id) REFERENCES vets(vet_id) ON DELETE CASCADE;
-  ADD CONSTRAINT fk_animals_id FOREIGN KEY (animals_id) REFERENCES animals(id) ON DELETE CASCADE;
+  CONSTRAINT fk_vet_id FOREIGN KEY (vet_id) REFERENCES vets(vet_id) ON DELETE CASCADE,
+  CONSTRAINT fk_animals_id FOREIGN KEY (animals_id) REFERENCES animals(id) ON DELETE CASCADE
 );
 
 
