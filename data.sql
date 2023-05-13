@@ -127,3 +127,11 @@ INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('Maisy Smith', 26, 
 INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('Stephanie Mendez', 64, date('1981-05-04'));
 
 INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('Jack Harkness', 38, date('2008-06-08'));
+
+INSERT INTO specializations(vet_id, species_id) VALUES((SELECT vet_id FROM vets WHERE vet_name = 'William Tatcher'),(SELECT spcies_id FROM species WHERE species_name = 'Pokemon'));
+
+INSERT INTO specializations(vet_id, species_id) VALUES((SELECT vet_id FROM vets WHERE vet_name = 'Stephanie Mendez'),(SELECT spcies_id FROM species WHERE species_name = 'Pokemon'));
+
+INSERT INTO specializations(vet_id, species_id) VALUES((SELECT vet_id FROM vets WHERE vet_name = 'Stephanie Mendez'),(SELECT spcies_id FROM species WHERE species_name = 'Digimon'));
+
+INSERT INTO specializations(vet_id, species_id) VALUES((SELECT vet_id FROM vets WHERE vet_name = 'Jack Harkness'),(SELECT spcies_id FROM species WHERE species_name = 'Digimon'));
