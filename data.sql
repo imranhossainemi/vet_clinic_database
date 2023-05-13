@@ -120,3 +120,10 @@ UPDATE animals SET owners_id = (SELECT owners_id FROM owners WHERE full_name = '
 UPDATE animals SET owners_id = (SELECT owners_id FROM owners WHERE full_name = 'Melody') WHERE  name = 'Charmander' OR name = 'Squirtle' OR name ='Blossom';
 UPDATE animals SET owners_id = (SELECT owners_id FROM owners WHERE full_name = 'Dean Winchester') WHERE  name = 'Angemon' OR name='Boarmon';
 
+INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('William', 45, date('2000-04-23'));
+
+INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('', 45, date('2000-04-23'));
+
+INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('William', 45, date('2000-04-23'));
+
+INSERT INTO vets(vet_name,vet_age,date_of_graduation) VALUES('William', 45, date('2000-04-23'));
