@@ -15,7 +15,7 @@ This repository includes files with plain SQL that can be used to recreate a dat
 
 <div align="center">
 <h3><b>Vet Clinic Database Daigram</b></h3>
-<img src="vet_clinic_DrawSQL.png" alt="daigram" width="440"  height="auto" />
+<img src="vet_clinic_DrawSQL.png" alt="daigram" width="640"  height="auto" />
 </div>
 
 - Use [schema.sql](./schema.sql) to create all tables.
