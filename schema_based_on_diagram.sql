@@ -59,3 +59,8 @@ FOREIGN KEY (treatment_id)
 REFERENCES treatments(id)
 ON DELETE CASCADE
 );
+
+CREATE TABLE medical_histories_has_treatments (
+    medical_history_id int refrences medical_histories(id),
+    treatment_id int refrences treatments(id),
+);
