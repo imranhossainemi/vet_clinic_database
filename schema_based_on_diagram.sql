@@ -1,59 +1,61 @@
 /* Database schema to keep the structure of entire database. */
-CREATE DATABASE vet_clinic;
+CREATE DATABASE clinic;
 
-CREATE TABLE animals(
-id BIGINT GENERATED ALWAYS AS IDENTITY,
+CREATE TABLE patients(
+id INT GENERATED ALWAYS AS IDENTITY,
 name VARCHAR,
 date_of_birth DATE,
-escape_attempts INT,
-neutered boolean,
-weight_kg DECIMAL,
-species_id INT,
-owner_id INT,
 PRIMARY KEY(id),
-CONSTRAINT fk_species
-FOREIGN KEY (species_id)
-REFERENCES species(spcies_id)
-ON DELETE CASCADE,
-CONSTRAINT fk_owners 
-FOREIGN KEY (owner_id)
-REFERENCES owners(owners_id)
+);
+
+CREATE TABLE medical_histories(
+id INT GENERATED ALWAYS AS IDENTITY REFERENCES treatments(id),
+status VARCHAR,
+admitted_at TIMESTAMP,
+patient_id int,
+PRIMARY KEY(id),
+CONSTRAINT fk_patient_id
+FOREIGN KEY (patient_id)
+REFERENCES patients(id)
 ON DELETE CASCADE
 );
 
-CREATE TABLE owners(
-owners_id BIGINT GENERATED ALWAYS AS IDENTITY,
-full_name VARCHAR(50),
-owners_age INT,
-PRIMARY KEY(owners_id)
+CREATE TABLE treatments(
+id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY REFERENCES medical_histories(id),
+type VARCHAR,
+name VARCHAR,
 );
 
-CREATE TABLE species(
-spcies_id INT GENERATED ALWAYS AS IDENTITY,
-species_name VARCHAR(50),
-PRIMARY KEY(spcies_id)
+ALTER TABLE medical_histories ADD CONSTRAINT fk_id FOREIGN KEY (id) REFERENCES treatments(id);
+
+ALTER TABLE treatments ADD CONSTRAINT fk_id FOREIGN KEY (id) REFERENCES medical_histories(id);
+
+CREATE TABLE invoices(
+id INT GENERATED ALWAYS AS IDENTITY,
+total_amount DECIMAL,
+generated_at TIMESTAMP,
+payed_at TIMESTAMP,
+medical_history_id INT,
+PRIMARY KEY(id),
+CONSTRAINT fk_med_history 
+FOREIGN KEY (medical_history_id)
+REFERENCES medical_histories(id)
+ON DELETE CASCADE
 );
 
--- Create vets table
-
-CREATE TABLE vets(
-vet_id INT GENERATED ALWAYS AS IDENTITY,
-vet_name VARCHAR(50),
-vet_age INT,
-date_of_graduation DATE
-);
-
-CREATE TABLE specializations(
-spe_id BIGINT GENERATED ALWAYS AS IDENTITY,
-species_id BIGINT REFERENCES species(spcies_id),
-vet_id BIGINT REFERENCES vets(vet_id),
-PRIMARY KEY(spe_id)
-);
-
-CREATE TABLE visits(
-visit_id BIGINT GENERATED ALWAYS AS IDENTITY,
-animals_id BIGINT REFERENCES animals(id),
-vet_id BIGINT REFERENCES vets(id),
-date_of_visit DATE,
-PRIMARY KEY(visit_id)                     
+CREATE TABLE invoice_items(
+id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+unit_price DECIMAL,
+quantity INT,
+total_price DECIMAL,
+invoice_id INT,
+treatment_id INT,
+CONSTRAINT fk_invoice_id
+FOREIGN KEY (invoice_id)
+REFERENCES invoices(id)
+ON DELETE CASCADE,
+CONSTRAINT fk_treatment_id
+FOREIGN KEY (treatment_id)
+REFERENCES treatments(id)
+ON DELETE CASCADE
 );
