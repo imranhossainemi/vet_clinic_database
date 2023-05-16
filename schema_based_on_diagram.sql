@@ -1,63 +1,58 @@
 /* Database schema to keep the structure of entire database. */
 
 CREATE TABLE animals(
-id INT GENERATED ALWAYS AS IDENTITY,
+id BIGINT GENERATED ALWAYS AS IDENTITY,
 name VARCHAR,
 date_of_birth DATE,
 escape_attempts INT,
-neutered BIT,
+neutered boolean,
 weight_kg DECIMAL,
-PRIMARY KEY(id)
+species_id INT,
+owner_id INT,
+PRIMARY KEY(id),
+CONSTRAINT fk_species
+FOREIGN KEY (species_id)
+REFERENCES species(spcies_id)
+ON DELETE CASCADE,
+CONSTRAINT fk_owners 
+FOREIGN KEY (owner_id)
+REFERENCES owners(owners_id)
+ON DELETE CASCADE
 );
 
 CREATE TABLE owners(
-id INT GENERATED ALWAYS AS IDENTITY,
+owners_id BIGINT GENERATED ALWAYS AS IDENTITY,
 full_name VARCHAR(50),
-age INT,
-PRIMARY KEY(id)
+owners_age INT,
+PRIMARY KEY(owners_id)
 );
 
 CREATE TABLE species(
-id INT GENERATED ALWAYS AS IDENTITY,
-name VARCHAR(50),
-PRIMARY KEY(id)
+spcies_id INT GENERATED ALWAYS AS IDENTITY,
+species_name VARCHAR(50),
+PRIMARY KEY(spcies_id)
 );
-
-ALTER TABLE animals ADD species_id INT;
-
-ALTER TABLE animals
-ADD CONSTRAINT fk_species
-FOREIGN KEY (species_id)
-REFERENCES species(id)
-ON DELETE CASCADE;
-
-ALTER TABLE animals ADD owner_id INT;
-
-ALTER TABLE animals
-ADD CONSTRAINT fk_owners 
-FOREIGN KEY (owner_id)
-REFERENCES owners(id)
-ON DELETE CASCADE;
 
 -- Create vets table
 
 CREATE TABLE vets(
-id INT GENERATED ALWAYS AS IDENTITY,
-name VARCHAR(50),
-age INT,
+vet_id INT GENERATED ALWAYS AS IDENTITY,
+vet_name VARCHAR(50),
+vet_age INT,
 date_of_graduation DATE
 );
 
 CREATE TABLE specializations(
-species_id INT REFERENCES species(id),
-vet_id INT REFERENCES vets(id),
-PRIMARY KEY(species_id, vet_id)
+spe_id BIGINT GENERATED ALWAYS AS IDENTITY,
+species_id BIGINT REFERENCES species(spcies_id),
+vet_id BIGINT REFERENCES vets(vet_id),
+PRIMARY KEY(spe_id)
 );
 
 CREATE TABLE visits(
-id INT GENERATED ALWAYS AS IDENTITY,
-animal_id INT REFERENCES animals(id),
-vet_id INT REFERENCES vets(id),
-visit_date DATE,
-PRIMARY KEY(id)                     
+visit_id BIGINT GENERATED ALWAYS AS IDENTITY,
+animals_id BIGINT REFERENCES animals(id),
+vet_id BIGINT REFERENCES vets(id),
+date_of_visit DATE,
+PRIMARY KEY(visit_id)                     
 );
